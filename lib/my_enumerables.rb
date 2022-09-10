@@ -28,6 +28,72 @@ module Enumerable
     end
     result
   end
+
+  def my_any?(pat = TrueClass)
+    for i in self
+      if block_given?
+        result = yield i
+      elsif pat == TrueClass
+        result = ((i&&true) in ^pat)
+      else
+        result = (i in ^pat)
+      end
+      result ? break : next
+    end
+    result
+  end
+
+  def my_none?(pat = TrueClass)
+    for i in self
+      if block_given?
+        result = yield i
+      elsif pat == TrueClass
+        result = ((i&&true) in ^pat)
+      else
+        result = (i in ^pat)
+      end
+      result ? break : next
+    end
+    !result
+  end
+  
+  def my_count(obj = Object)
+    count = 0
+    for el in self
+      if block_given?
+        count += 1 if yield el
+      else
+        count += 1 if obj === el
+      end
+    end
+    count
+  end
+
+  def my_map
+    result = []
+    for el in self
+      o = yield el if block_given?
+      result << o
+    end
+    result
+  end
+
+  def my_inject(init_val = self.first, symbolic = Symbol)
+    result = init_val  
+    for el in self
+      if result in Symbol
+        result = self.first
+        next
+      end
+      if block_given?
+        result = yield result, el
+      else
+        symbolic = init_val if symbolic == Symbol
+        result = result.send(symbolic, el)
+      end
+    end    
+    result
+  end
 end
 
 # You will first have to define my_each
