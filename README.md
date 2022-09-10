@@ -2,6 +2,12 @@
 
 This repository complements the [Custom Enumerables Project](https://www.theodinproject.com/lessons/ruby-custom-enumerables) in the Ruby Course for The Odin Project. The goal of this project is to reimplement common methods used frequently through the enumerables module with objects like arrays and hashes. Some starter code and specs are provided to validate the correctness of the solutions.
 
+**Note**
+
+```
+This repository was cloned from the odin project
+```
+
 ### Methods
 
 The following table has the methods along with their associated specs, as outlined in the project instructions.
